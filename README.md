@@ -8,5 +8,5 @@ Notice: It can take up to 3 minutes for your server to receive new likes. This i
 Command | Permission | Description
 --- | --- | ---
 /namemc | none | Sends a link to your server's NameMC page.
-/namemc reload | namemcrewards.reload | Reloads the plugin.
 /namemc likes [player] | namemcrewards.likes | Check how many player like your server on NameMC. Or check if a specific player likes your server on NameMC.
+/namemc reload | namemcrewards.reload | Reloads the plugin.
