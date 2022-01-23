@@ -1,0 +1,6 @@
+rootProject.name = 'NameMC Rewards'
+include 'common'
+include 'bungee'
+include 'spigot'
+include 'nukkit'
+

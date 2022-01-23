@@ -1,0 +1,21 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="NameMC Rewards:jar">
+    <output-path>E:/Servers/SavageCraft/Proxies/Proxy-0/plugins</output-path>
+    <root id="archive" name="NameMC Rewards.jar">
+      <element id="module-output" name="NameMC Rewards" />
+      <element id="module-output" name="bungee" />
+      <element id="module-output" name="common" />
+      <element id="module-output" name="spigot" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/ninja/leaping/configurate/configurate-core/3.3/configurate-core-3.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/zaxxer/HikariCP/3.3.1/HikariCP-3.3.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/ninja/leaping/configurate/configurate-yaml/3.3/configurate-yaml-3.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/yaml/snakeyaml/1.18/snakeyaml-1.18.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/ninja/leaping/configurate/configurate-gson/3.3/configurate-gson-3.3.jar" path-in-jar="/" />
+      <element id="file-copy" path="$PROJECT_DIR$/bungee/src/main/resources/config.yml" />
+      <element id="file-copy" path="$PROJECT_DIR$/bungee/src/main/resources/bungee.yml" />
+      <element id="file-copy" path="$PROJECT_DIR$/spigot/src/main/resources/plugin.yml" />
+      <element id="file-copy" path="$PROJECT_DIR$/spigot/src/main/resources/config.yml" />
+    </root>
+  </artifact>
+</component>

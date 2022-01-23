@@ -1,0 +1,5 @@
+name: NameMCRewards
+version: ${version}
+
+main: net.savagedev.namemcrewards.bungee.NameMCRewardsBungee
+author: SavageAvocado

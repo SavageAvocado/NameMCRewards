@@ -1,0 +1,9 @@
+# Project exclude paths
+/.gradle/
+/common/build/
+/common/build/classes/java/main/
+/nukkit/build/
+/nukkit/build/classes/java/main/
+/out/
+/spigot/build/
+/spigot/build/classes/java/main/

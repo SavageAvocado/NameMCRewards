@@ -1,0 +1,14 @@
+name: NameMCRewards
+description: Reward your players for liking your server on NameMC.
+
+website: savagedev.net
+author: SavageAvocado
+
+main: net.savagedev.namemcrewards.spigot.NameMCRewardsSpigot
+api-version: '1.13'
+version: ${version}
+
+commands:
+  namemc:
+    description: "Get a link to the server''s NameMC page."
+    aliases: [ "nmc" ]
