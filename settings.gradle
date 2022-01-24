@@ -3,4 +3,5 @@ include 'common'
 include 'bungee'
 include 'spigot'
 include 'nukkit'
+include 'velocity'
 

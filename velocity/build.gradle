@@ -1,0 +1,28 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '7.1.0'
+}
+
+group 'net.savagedev'
+version '1.0.0-SNAPSHOT'
+
+repositories {
+    maven { url 'https://repo.velocitypowered.com/snapshots/' }
+}
+
+dependencies {
+    compileOnly 'com.velocitypowered:velocity-api:1.0.0-SNAPSHOT'
+
+    implementation project(':common')
+}
+
+shadowJar {
+    archiveFileName = "${rootProject.name}-Velocity-${project.version}.jar"
+}
+
+processResources {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    from(sourceSets.main.resources.srcDirs) {
+        expand 'version': project.version
+        include 'bungee.yml'
+    }
+}

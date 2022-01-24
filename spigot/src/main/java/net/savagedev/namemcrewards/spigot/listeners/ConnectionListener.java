@@ -1,11 +1,12 @@
 package net.savagedev.namemcrewards.spigot.listeners;
 
+import net.savagedev.namemcrewards.common.listeners.AbstractConnectionListener;
 import net.savagedev.namemcrewards.spigot.NameMCRewardsSpigot;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-public class ConnectionListener implements Listener {
+public class ConnectionListener extends AbstractConnectionListener implements Listener {
     private final NameMCRewardsSpigot context;
 
     public ConnectionListener(final NameMCRewardsSpigot context) {

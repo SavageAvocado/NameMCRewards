@@ -1,0 +1,27 @@
+# The address players use to connect to your server.
+# Ex. My server's players would use "savageavocado.com" (instead of the number IP) to connect to my server, so I entered that below.
+address: savageavocado.com
+
+namemc-info:
+  - "&7&m-------------------------"
+  - "&aLike our server on NameMC!"
+  - "&9https://namemc.com/server/savageavocado.com"
+  - "&7&m-------------------------"
+
+# The reward(s) that will be given when a player likes your server on NameMC.
+# Just remove any sections you don't want to use.
+rewards:
+  # This message will be sent to everyone on the server, except the player who liked the server.
+  broadcast: "&6NameMC Rewards &8| &6%player% &7liked the server on NameMC and was rewarded with nothing!"
+
+  # This message will only be sent to the player who liked your server.
+  message: "&6NameMC Rewards &8| &7Thank you for liking the server on NameMC! Here's... Nothing!"
+
+  # These are commands that will be run by console. The "%player%" placeholder will be replaced with the username of the player who liked the server.
+  commands: [ ]
+
+# The commands that will run when a player unlikes your server on NameMC.
+unlike:
+  broadcast: "&6NameMC Rewards &8| &6%player% &cunliked the server on NameMC! :("
+  message: "&6NameMC Rewards &8| &cSMH my head, family... Why u unlike?"
+  commands: [ ] # idk ban them or something? (Don't really do that) BTW, this gets formatted the same way as the "commands" section above does.
