@@ -2,8 +2,10 @@ package net.savagedev.namemcrewards.bungee;
 
 import net.md_5.bungee.api.plugin.Plugin;
 import net.savagedev.namemcrewards.bungee.commands.BungeeCommandExecutor;
+import net.savagedev.namemcrewards.bungee.commands.sender.BungeeSender;
 import net.savagedev.namemcrewards.bungee.listeners.ConnectionListener;
 import net.savagedev.namemcrewards.bungee.listeners.namemc.NameMcListener;
+import net.savagedev.namemcrewards.common.command.sender.Sender;
 import net.savagedev.namemcrewards.common.commands.NameMcCommand;
 import net.savagedev.namemcrewards.common.config.Configuration;
 import net.savagedev.namemcrewards.common.namemc.ApiPollTask;
@@ -14,8 +16,10 @@ import net.savagedev.namemcrewards.common.storage.implementation.file.FileStorag
 import net.savagedev.namemcrewards.common.storage.implementation.file.loader.YamlLoader;
 
 import java.nio.file.Paths;
+import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class NameMCRewardsBungee extends Plugin implements NameMCRewardsPlugin {
     private ApiPollTask apiPollThread;
@@ -37,6 +41,11 @@ public class NameMCRewardsBungee extends Plugin implements NameMCRewardsPlugin {
             this.storage.shutdown();
         }
         this.initStorage();
+    }
+
+    @Override
+    public Set<Sender<?>> getOnlineSenders() {
+        return this.getProxy().getPlayers().stream().map(BungeeSender::new).collect(Collectors.toSet());
     }
 
     @Override

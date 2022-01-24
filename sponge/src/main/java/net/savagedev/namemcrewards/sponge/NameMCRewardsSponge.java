@@ -1,6 +1,7 @@
 package net.savagedev.namemcrewards.sponge;
 
 import com.google.inject.Inject;
+import net.savagedev.namemcrewards.common.command.sender.Sender;
 import net.savagedev.namemcrewards.common.commands.NameMcCommand;
 import net.savagedev.namemcrewards.common.config.Configuration;
 import net.savagedev.namemcrewards.common.namemc.ApiPollTask;
@@ -20,6 +21,7 @@ import org.spongepowered.api.event.game.state.GameStoppingServerEvent;
 import org.spongepowered.api.plugin.Plugin;
 
 import java.nio.file.Paths;
+import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Logger;
 
@@ -50,6 +52,11 @@ public class NameMCRewardsSponge implements NameMCRewardsPlugin {
             this.storage.shutdown();
         }
         this.initStorage();
+    }
+
+    @Override
+    public Set<Sender<?>> getOnlineSenders() {
+        return null;
     }
 
     public void on(GameStoppingServerEvent ignored) {

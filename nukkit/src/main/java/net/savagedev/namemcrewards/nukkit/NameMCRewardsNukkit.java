@@ -2,9 +2,7 @@ package net.savagedev.namemcrewards.nukkit;
 
 import cn.nukkit.Player;
 import cn.nukkit.plugin.PluginBase;
-import net.savagedev.namemcrewards.nukkit.command.NukkitCommandExecutor;
-import net.savagedev.namemcrewards.nukkit.listeners.ConnectionListener;
-import net.savagedev.namemcrewards.nukkit.listeners.namemc.NameMcListener;
+import net.savagedev.namemcrewards.common.command.sender.Sender;
 import net.savagedev.namemcrewards.common.commands.NameMcCommand;
 import net.savagedev.namemcrewards.common.config.Configuration;
 import net.savagedev.namemcrewards.common.namemc.ApiPollTask;
@@ -13,10 +11,16 @@ import net.savagedev.namemcrewards.common.plugin.NameMCRewardsPlugin;
 import net.savagedev.namemcrewards.common.storage.Storage;
 import net.savagedev.namemcrewards.common.storage.implementation.file.FileStorage;
 import net.savagedev.namemcrewards.common.storage.implementation.file.loader.YamlLoader;
+import net.savagedev.namemcrewards.nukkit.command.NukkitCommandExecutor;
+import net.savagedev.namemcrewards.nukkit.command.sender.NukkitSender;
+import net.savagedev.namemcrewards.nukkit.listeners.ConnectionListener;
+import net.savagedev.namemcrewards.nukkit.listeners.namemc.NameMcListener;
 
 import java.nio.file.Paths;
+import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class NameMCRewardsNukkit extends PluginBase implements NameMCRewardsPlugin {
     private final Logger logger = Logger.getLogger("NameMCRewards");
@@ -40,6 +44,11 @@ public class NameMCRewardsNukkit extends PluginBase implements NameMCRewardsPlug
             this.storage.shutdown();
         }
         this.initStorage();
+    }
+
+    @Override
+    public Set<Sender<?>> getOnlineSenders() {
+        return this.getServer().getOnlinePlayers().values().stream().map(NukkitSender::new).collect(Collectors.toSet());
     }
 
     @Override

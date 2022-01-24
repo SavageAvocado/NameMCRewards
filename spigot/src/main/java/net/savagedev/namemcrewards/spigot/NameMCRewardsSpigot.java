@@ -1,5 +1,6 @@
 package net.savagedev.namemcrewards.spigot;
 
+import net.savagedev.namemcrewards.common.command.sender.Sender;
 import net.savagedev.namemcrewards.common.commands.NameMcCommand;
 import net.savagedev.namemcrewards.common.config.Configuration;
 import net.savagedev.namemcrewards.common.namemc.ApiPollTask;
@@ -10,6 +11,7 @@ import net.savagedev.namemcrewards.common.storage.implementation.file.FileStorag
 import net.savagedev.namemcrewards.common.storage.implementation.file.loader.YamlLoader;
 import net.savagedev.namemcrewards.common.utils.io.Constants;
 import net.savagedev.namemcrewards.spigot.commands.SpigotCommandExecutor;
+import net.savagedev.namemcrewards.spigot.commands.sender.SpigotSender;
 import net.savagedev.namemcrewards.spigot.listeners.ConnectionListener;
 import net.savagedev.namemcrewards.spigot.listeners.MessageListener;
 import net.savagedev.namemcrewards.spigot.listeners.namemc.NameMcListener;
@@ -18,8 +20,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.nio.file.Paths;
+import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class NameMCRewardsSpigot extends JavaPlugin implements NameMCRewardsPlugin {
     private ApiPollTask apiPollThread;
@@ -41,6 +45,11 @@ public class NameMCRewardsSpigot extends JavaPlugin implements NameMCRewardsPlug
             this.storage.shutdown();
         }
         this.initStorage();
+    }
+
+    @Override
+    public Set<Sender<?>> getOnlineSenders() {
+        return this.getServer().getOnlinePlayers().stream().map(SpigotSender::new).collect(Collectors.toSet());
     }
 
     @Override

@@ -7,6 +7,7 @@ import com.velocitypowered.api.event.proxy.ProxyShutdownEvent;
 import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.ProxyServer;
+import net.savagedev.namemcrewards.common.command.sender.Sender;
 import net.savagedev.namemcrewards.common.commands.NameMcCommand;
 import net.savagedev.namemcrewards.common.config.Configuration;
 import net.savagedev.namemcrewards.common.namemc.ApiPollTask;
@@ -21,6 +22,7 @@ import net.savagedev.namemcrewards.velocity.listeners.namemc.NameMcListener;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Logger;
 
@@ -58,6 +60,11 @@ public class NameMCRewardsVelocity implements NameMCRewardsPlugin {
             this.storage.shutdown();
         }
         this.initStorage();
+    }
+
+    @Override
+    public Set<Sender<?>> getOnlineSenders() {
+        return null;
     }
 
     @Subscribe
