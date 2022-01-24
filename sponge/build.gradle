@@ -6,24 +6,24 @@ group 'net.savagedev'
 version '1.0.0-SNAPSHOT'
 
 repositories {
-    maven { url 'https://repo.velocitypowered.com/snapshots/' }
+    maven { url 'https://repo.spongepowered.org/maven' }
 }
 
 dependencies {
-    compileOnly 'com.velocitypowered:velocity-api:1.0.0-SNAPSHOT'
-    annotationProcessor 'com.velocitypowered:velocity-api:1.0.0-SNAPSHOT'
+    compileOnly 'org.spongepowered:spongeapi:7.2.0'
+    annotationProcessor 'org.spongepowered:spongeapi:7.2.0'
 
     implementation project(':common')
 }
 
 shadowJar {
-    archiveFileName = "${rootProject.name}-Velocity-${project.version}.jar"
+    archiveFileName = "${rootProject.name}-Sponge-${project.version}.jar"
 }
 
 processResources {
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
     from(sourceSets.main.resources.srcDirs) {
         expand 'version': project.version
-        include 'bungee.yml'
+        include 'plugin.yml'
     }
 }

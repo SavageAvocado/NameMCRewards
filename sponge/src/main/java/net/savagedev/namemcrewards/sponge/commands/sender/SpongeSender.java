@@ -1,23 +1,24 @@
-package net.savagedev.namemcrewards.velocity.commands.sender;
+package net.savagedev.namemcrewards.sponge.commands.sender;
 
-import com.velocitypowered.api.command.CommandSource;
-import com.velocitypowered.api.proxy.Player;
-import net.kyori.text.serializer.legacy.LegacyComponentSerializer;
+
 import net.savagedev.namemcrewards.common.command.sender.Sender;
+import org.spongepowered.api.command.CommandSource;
+import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.text.serializer.TextSerializers;
 
 import java.util.List;
 
-public class VelocitySender implements Sender<CommandSource> {
+public class SpongeSender implements Sender<CommandSource> {
     private final CommandSource source;
 
-    public VelocitySender(CommandSource source) {
+    public SpongeSender(final CommandSource source) {
         this.source = source;
     }
 
     @Override
     public void message(List<String> messages) {
         for (String message : messages) {
-            this.source.sendMessage(LegacyComponentSerializer.legacy().deserialize(message, '&'));
+            this.source.sendMessage(TextSerializers.formattingCode('&').deserialize(message));
         }
     }
 
@@ -26,7 +27,7 @@ public class VelocitySender implements Sender<CommandSource> {
         if (message == null || message.isEmpty()) {
             return;
         }
-        this.source.sendMessage(LegacyComponentSerializer.legacy().deserialize(message, '&'));
+        this.source.sendMessage(TextSerializers.formattingCode('&').deserialize(message));
     }
 
     @Override
