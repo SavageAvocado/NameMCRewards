@@ -9,13 +9,14 @@ import net.savagedev.namemcrewards.common.command.sender.Sender;
 import net.savagedev.namemcrewards.common.commands.NameMcCommand;
 import net.savagedev.namemcrewards.common.config.Configuration;
 import net.savagedev.namemcrewards.common.namemc.ApiPollTask;
-import net.savagedev.namemcrewards.common.namemc.NameMCAPI;
+import net.savagedev.namemcrewards.common.namemc.NameMcApi;
 import net.savagedev.namemcrewards.common.plugin.NameMCRewardsPlugin;
 import net.savagedev.namemcrewards.common.storage.Storage;
 import net.savagedev.namemcrewards.common.storage.implementation.file.FileStorage;
 import net.savagedev.namemcrewards.common.storage.implementation.file.loader.YamlLoader;
 
 import java.nio.file.Paths;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Logger;
@@ -44,8 +45,18 @@ public class NameMCRewardsBungee extends Plugin implements NameMCRewardsPlugin {
     }
 
     @Override
+    public void dispatchCommand(String command) {
+        this.getProxy().getPluginManager().dispatchCommand(this.getProxy().getConsole(), command);
+    }
+
+    @Override
     public Set<Sender<?>> getOnlineSenders() {
         return this.getProxy().getPlayers().stream().map(BungeeSender::new).collect(Collectors.toSet());
+    }
+
+    @Override
+    public Optional<Sender<?>> getSender(UUID uuid) {
+        return Optional.empty();
     }
 
     @Override
@@ -74,11 +85,16 @@ public class NameMCRewardsBungee extends Plugin implements NameMCRewardsPlugin {
 
     private void initListeners() {
         this.getProxy().getPluginManager().registerListener(this, new ConnectionListener(this));
-        NameMCAPI.subscribe(new NameMcListener());
+        NameMcApi.subscribe(new NameMcListener());
     }
 
     @Override
     public UUID getUniqueId(String username) {
+        return null;
+    }
+
+    @Override
+    public String getUsername(UUID uuid) {
         return null;
     }
 

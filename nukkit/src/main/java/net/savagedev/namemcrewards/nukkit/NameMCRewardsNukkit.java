@@ -6,7 +6,6 @@ import net.savagedev.namemcrewards.common.command.sender.Sender;
 import net.savagedev.namemcrewards.common.commands.NameMcCommand;
 import net.savagedev.namemcrewards.common.config.Configuration;
 import net.savagedev.namemcrewards.common.namemc.ApiPollTask;
-import net.savagedev.namemcrewards.common.namemc.NameMCAPI;
 import net.savagedev.namemcrewards.common.plugin.NameMCRewardsPlugin;
 import net.savagedev.namemcrewards.common.storage.Storage;
 import net.savagedev.namemcrewards.common.storage.implementation.file.FileStorage;
@@ -14,9 +13,9 @@ import net.savagedev.namemcrewards.common.storage.implementation.file.loader.Yam
 import net.savagedev.namemcrewards.nukkit.command.NukkitCommandExecutor;
 import net.savagedev.namemcrewards.nukkit.command.sender.NukkitSender;
 import net.savagedev.namemcrewards.nukkit.listeners.ConnectionListener;
-import net.savagedev.namemcrewards.nukkit.listeners.namemc.NameMcListener;
 
 import java.nio.file.Paths;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Logger;
@@ -47,8 +46,17 @@ public class NameMCRewardsNukkit extends PluginBase implements NameMCRewardsPlug
     }
 
     @Override
+    public void dispatchCommand(String command) {
+    }
+
+    @Override
     public Set<Sender<?>> getOnlineSenders() {
         return this.getServer().getOnlinePlayers().values().stream().map(NukkitSender::new).collect(Collectors.toSet());
+    }
+
+    @Override
+    public Optional<Sender<?>> getSender(UUID uuid) {
+        return Optional.empty();
     }
 
     @Override
@@ -77,7 +85,6 @@ public class NameMCRewardsNukkit extends PluginBase implements NameMCRewardsPlug
 
     private void initListeners() {
         this.getServer().getPluginManager().registerEvents(new ConnectionListener(), this);
-        NameMCAPI.subscribe(new NameMcListener());
     }
 
     @Override
@@ -87,6 +94,15 @@ public class NameMCRewardsNukkit extends PluginBase implements NameMCRewardsPlug
             return this.getServer().getOfflinePlayer(username).getUniqueId();
         }
         return player.getUniqueId();
+    }
+
+    @Override
+    public String getUsername(UUID uuid) {
+        final Optional<Player> player = this.getServer().getPlayer(uuid);
+        if (player.isEmpty()) {
+            return this.getServer().getOfflinePlayer(uuid).getName();
+        }
+        return player.get().getName();
     }
 
     @Override

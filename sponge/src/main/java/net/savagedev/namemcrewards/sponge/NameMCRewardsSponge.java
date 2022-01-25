@@ -5,7 +5,7 @@ import net.savagedev.namemcrewards.common.command.sender.Sender;
 import net.savagedev.namemcrewards.common.commands.NameMcCommand;
 import net.savagedev.namemcrewards.common.config.Configuration;
 import net.savagedev.namemcrewards.common.namemc.ApiPollTask;
-import net.savagedev.namemcrewards.common.namemc.NameMCAPI;
+import net.savagedev.namemcrewards.common.namemc.NameMcApi;
 import net.savagedev.namemcrewards.common.plugin.NameMCRewardsPlugin;
 import net.savagedev.namemcrewards.common.storage.Storage;
 import net.savagedev.namemcrewards.common.storage.implementation.file.FileStorage;
@@ -89,7 +89,7 @@ public class NameMCRewardsSponge implements NameMCRewardsPlugin {
 
     private void initListeners() {
         this.game.getEventManager().registerListeners(this, new ConnectionListener());
-        NameMCAPI.subscribe(new NameMcListener());
+        NameMcApi.subscribe(new NameMcListener());
     }
 
     @Override

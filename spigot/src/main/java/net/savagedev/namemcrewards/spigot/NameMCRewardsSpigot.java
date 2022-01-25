@@ -4,7 +4,6 @@ import net.savagedev.namemcrewards.common.command.sender.Sender;
 import net.savagedev.namemcrewards.common.commands.NameMcCommand;
 import net.savagedev.namemcrewards.common.config.Configuration;
 import net.savagedev.namemcrewards.common.namemc.ApiPollTask;
-import net.savagedev.namemcrewards.common.namemc.NameMCAPI;
 import net.savagedev.namemcrewards.common.plugin.NameMCRewardsPlugin;
 import net.savagedev.namemcrewards.common.storage.Storage;
 import net.savagedev.namemcrewards.common.storage.implementation.file.FileStorage;
@@ -14,12 +13,12 @@ import net.savagedev.namemcrewards.spigot.commands.SpigotCommandExecutor;
 import net.savagedev.namemcrewards.spigot.commands.sender.SpigotSender;
 import net.savagedev.namemcrewards.spigot.listeners.ConnectionListener;
 import net.savagedev.namemcrewards.spigot.listeners.MessageListener;
-import net.savagedev.namemcrewards.spigot.listeners.namemc.NameMcListener;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.nio.file.Paths;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Logger;
@@ -45,11 +44,6 @@ public class NameMCRewardsSpigot extends JavaPlugin implements NameMCRewardsPlug
             this.storage.shutdown();
         }
         this.initStorage();
-    }
-
-    @Override
-    public Set<Sender<?>> getOnlineSenders() {
-        return this.getServer().getOnlinePlayers().stream().map(SpigotSender::new).collect(Collectors.toSet());
     }
 
     @Override
@@ -85,7 +79,25 @@ public class NameMCRewardsSpigot extends JavaPlugin implements NameMCRewardsPlug
 
     private void initListeners() {
         this.getServer().getPluginManager().registerEvents(new ConnectionListener(this), this);
-        NameMCAPI.subscribe(new NameMcListener());
+    }
+
+    @Override
+    public void dispatchCommand(String command) {
+        this.getServer().dispatchCommand(this.getServer().getConsoleSender(), command);
+    }
+
+    @Override
+    public Set<Sender<?>> getOnlineSenders() {
+        return this.getServer().getOnlinePlayers().stream().map(SpigotSender::new).collect(Collectors.toSet());
+    }
+
+    @Override
+    public Optional<Sender<?>> getSender(UUID uuid) {
+        final Player player = this.getServer().getPlayer(uuid);
+        if (player == null) {
+            return Optional.empty();
+        }
+        return Optional.of(new SpigotSender(player));
     }
 
     @Override
@@ -95,6 +107,15 @@ public class NameMCRewardsSpigot extends JavaPlugin implements NameMCRewardsPlug
             return this.getServer().getOfflinePlayer(username).getUniqueId();
         }
         return player.getUniqueId();
+    }
+
+    @Override
+    public String getUsername(UUID uuid) {
+        final Player player = this.getServer().getPlayer(uuid);
+        if (player == null) {
+            return this.getServer().getOfflinePlayer(uuid).getName();
+        }
+        return player.getName();
     }
 
     @Override

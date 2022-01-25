@@ -2,6 +2,7 @@ package net.savagedev.namemcrewards.common.commands;
 
 import net.savagedev.namemcrewards.common.command.Command;
 import net.savagedev.namemcrewards.common.command.sender.Sender;
+import net.savagedev.namemcrewards.common.commands.subcommands.ForceCheckCommand;
 import net.savagedev.namemcrewards.common.plugin.NameMCRewardsPlugin;
 import net.savagedev.namemcrewards.common.commands.subcommands.LikesCommand;
 import net.savagedev.namemcrewards.common.commands.subcommands.ReloadCommand;
@@ -19,6 +20,7 @@ public class NameMcCommand implements Command {
     public NameMcCommand(final NameMCRewardsPlugin context) {
         this.context = context;
 
+        this.commandMap.put("forcecheck", new ForceCheckCommand(context));
         this.commandMap.put("likes", new LikesCommand(context));
         this.commandMap.put("reload", new ReloadCommand(context));
     }
